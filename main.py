@@ -1,37 +1,12 @@
-from typing import Annotated
-from fastapi import FastAPI, Path
+from fastapi import FastAPI, Request
+from fastapi.templating import Jinja2Templates
+from starlette.responses import HTMLResponse
 
 app = FastAPI()
+templates = Jinja2Templates(directory="templates")
 
-messages_db = {"0": "First post in FastApi"}
-
-@app.get("/")
-async def get_all_messages() -> dict:
-    return messages_db
-
-@app.get("/message/{message_id}")
-async def get_all_message(message_id: str) -> dict:
-    return messages_db[message_id]
-
-@app.post("/message")
-async def create_message(message: str) -> str:
-    current_index = str(int(max(messages_db, key=int)) + 1)
-    messages_db[current_index] = message
-    return "Massage created!"
-
-@app.put("/message/{message_id}")
-async def update_message(message_id: str, message: str) -> str:
-    messages_db[message_id] = message
-    return "Message updated"
-
-@app.delete("/message/{message_id}")
-async def delete_message(message_id: str) -> str:
-    messages_db.pop(message_id)
-    return f"Message with {message_id} was deleted"
-
-@app.delete("/")
-async def delete_all_messages() -> str:
-    messages_db.clear()
-    return "All message deleted."
-# python -m uvicorn 16_Biblioteki_raboti_c_resursamy.Postrornye_proeckta_1:app
+@app.get('/', response_class=HTMLResponse)
+async def home(request: Request):
+    return templates.TemplateResponse('home.html', {'request': request})
+# uvicorn main:app --reload
 
