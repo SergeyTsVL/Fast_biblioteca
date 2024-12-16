@@ -4,31 +4,31 @@
     <meta charset="UTF-8">
     <title>{% block title %}My Django Project{% endblock %}</title>
     <style>
-        {% block style %}
-            .navbar {
-                overflow: hidden;
-                background-color: #1679bb;
-                padding: 14px 16px;
-            }
-            .navbar a {
-                float: left;
-                color: #f2f2f2;
-                text-align: center;
-                padding: 12px;
-                text-decoration: none;
-                font-size: 17px;
-            }
-            .navbar a:hover {
-                background-color: #ddd;
-                color: black;
-            }
-        {% endblock %}
+        .navbar {
+            overflow: hidden;
+            background-color: #1679bb;
+            padding: 14px 16px;
+        }
+        .navbar a {
+            float: left;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 12px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
     </style>
 </head>
+
 <body>
     <div class="navbar">
         <a href="home">Home</a>
         <a>Board</a>
     </div>
 </body>
+{% block content %}{% endblock %}
 </html>
